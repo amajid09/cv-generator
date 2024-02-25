@@ -1,0 +1,33 @@
+label{
+    display: block;
+}
+input{
+    outline: none;
+    border: none;
+    padding: 1rem;
+    width: 15rem;
+}
+.input {
+    margin-top: .5rem;
+}
+.input-label{
+    margin: .75rem 0;
+}
+.personal{
+    width: 100%;
+}
+.inputs{
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+}
+
+.education-times input{
+    width: 6rem;
+}
+.education-times{
+    display: flex;
+    gap: 1rem;
+}
+.education-times label{
+    height: 2rem;
+}

@@ -1,35 +1,63 @@
+/* eslint-disable react/prop-types */
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import './css/App.css'
+import PersonalDetails from './personal-details'
+import ProfileInfo from './profile'
+import SideDetails from './side-details'
+import ProfessionalSummary from './summary'
+import Education from './education'
+import Employment from './employment'
+import DropDown from './dropdown'
 
-function App() {
-  const [count, setCount] = useState(0)
+export default function App() {
+  const [input , setInput] = useState({'title': '','first_name': '', 'last_name': '', 'city': '', 'country': '', 'phone': '', 'photo': ''})
+  const trackInput = (event) => {
+    const name = event.target.name;
+    const value = event.target.value;
+    const newInput = Object.assign({}, input)
+    newInput[name] = value
+    setInput(newInput);
+  }
+  return (
+    <div className='container'>
+      <Form onChange={trackInput} input={input} />
+      <CV input={input} />
+    </div> 
+  )
+}
+  
+function CV({ input }) {
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <div className='cv-container'>
+      <div className="cv-wrapper">
+        <SideDetails input={ input} />
+        <ProfileInfo input={ input} />
+     </div> 
+    </div>
   )
 }
 
-export default App
+
+
+function Form({ onChange }) {
+  const [add, setAdd] = useState([]);
+  
+  return (
+    <div className="form">
+      <div className="form-wrapper">
+        <PersonalDetails onChange={ onChange} /> 
+        <ProfessionalSummary onChange= {onChange} > 
+            Write a summary of your professional experience
+        </ProfessionalSummary>
+        
+          <DropDown title={ 'Education'}>
+            <Education onChange={onChange} /> 
+          </DropDown>
+          <DropDown title={ 'Employment History'}>
+            <Employment onChange={onChange} />
+        </DropDown> 
+      </div>
+      </div>
+  );
+}
