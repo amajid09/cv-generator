@@ -29,6 +29,7 @@ function Employment({ employment}) {
         <div className="employment">
             <h1>Employment history</h1>
             {employment.map((element, index) => {
+                console.log(element);
                 return (
                     <div key={index} className="history">
                         <h2>{element.employer}</h2>

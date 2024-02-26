@@ -12,19 +12,16 @@ import DropDown from './dropdown'
 export default function App() {
   const [input , setInput] = useState({})
   const [employment, setEmployment] = useState([{
-    'job_title': '', 'employer': '', 'start': '', 'end': '', 'description': '',
+  'job_title': '', 'employer': '', 'job_start': '', 'job_end': '', 'job_description': '',
   }])
     const onEmployment = (event, index) => {
         const name = event.target.name;
-        console.log(index)
-      const value = event.target.value;
-      const newEmployment = employment.slice();
-      if (index > newEmployment.length) {
-        newEmployment.push({});
-      }
+        const value = event.target.value;
+        const newEmployment = employment.slice();
+
         const newEmploymentObj = Object.assign({}, newEmployment[index]); 
-      
         newEmploymentObj[name] = value
+        newEmployment[index] = newEmploymentObj;
         setEmployment(newEmployment)
   }
 
@@ -59,8 +56,6 @@ function CV({ input , employment}) {
 
 
 function Form({ onChange , onEmployment}) {
-  const [add, setAdd] = useState([]);
-  
 
   return (
     <div className="form">
