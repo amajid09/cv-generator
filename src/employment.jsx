@@ -3,7 +3,7 @@ import { useState } from "react";
 import Input from "./input";
 import Text from "./textarea";
 
-export default function EmploymentInfo({ onChange }) {
+function EmploymentInfo({ onChange }) {
     return (
         <>
             <h2>Employment history</h2>
@@ -22,15 +22,15 @@ export default function EmploymentInfo({ onChange }) {
     )
 }
 
-function Employment( { onChange }) {
+export default function Employment( {onEmployment} ) {
+  
     const [add, setAdd] = useState([
-        <EmploymentInfo key={0} onChange={onChange} />,
+        <EmploymentInfo key={0} onChange={(event) => onEmployment(event, 0)} />,
     ])
     const onAdd = () => {
         const newAdd = add.slice();
-        newAdd.push(
-            <EmploymentInfo key={newAdd.length} onChange={onChange} />,
-        )
+        const element = <EmploymentInfo key={add.length} onChange={(event) => onEmployment(event, add.length)} />;
+        newAdd.push(element)
         setAdd(newAdd);
         console.log('in the add state')
     }

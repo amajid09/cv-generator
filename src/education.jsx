@@ -3,12 +3,12 @@ import { useState } from "react";
 import Input from "./input";
 import Text from "./textarea";
 
-function EducationInfo({ onChange }) {
+function EducationInputs({ onChange }) {
     return (
         <>
         <h2>Education</h2>
         <div className="inputs">
-            <Input title={'school'} onChange={onChange} label={'School'} /> 
+                <Input title={'school'} onChange={onChange} label={'School'} /> 
                 <Input title={'degree'} onChange={onChange} label={'Degree'} />
             <div className="education-times">    
                 <Input title={'start'} onChange={onChange} label={'Start & End Date'} /> 
@@ -24,12 +24,12 @@ function EducationInfo({ onChange }) {
 
 export default function Education({ onChange }) {
     const [add, setAdd] = useState([
-        <EducationInfo key={0} onChange={onChange} />,
+        <EducationInputs key={0} onChange={onChange} />,
     ])
     const onAdd = () => {
         const newAdd = add.slice();
         newAdd.push(
-            <EducationInfo key={newAdd.length} onChange={onChange} />,
+            <EducationInputs key={newAdd.length} onChange={onChange} />,
         )
         setAdd(newAdd);
         console.log('in the add state')

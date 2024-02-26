@@ -10,7 +10,24 @@ import Employment from './employment'
 import DropDown from './dropdown'
 
 export default function App() {
-  const [input , setInput] = useState({'title': '','first_name': '', 'last_name': '', 'city': '', 'country': '', 'phone': '', 'photo': ''})
+  const [input , setInput] = useState({})
+  const [employment, setEmployment] = useState([{
+    'job_title': '', 'employer': '', 'start': '', 'end': '', 'description': '',
+  }])
+    const onEmployment = (event, index) => {
+        const name = event.target.name;
+        console.log(index)
+      const value = event.target.value;
+      const newEmployment = employment.slice();
+      if (index > newEmployment.length) {
+        newEmployment.push({});
+      }
+        const newEmploymentObj = Object.assign({}, newEmployment[index]); 
+      
+        newEmploymentObj[name] = value
+        setEmployment(newEmployment)
+  }
+
   const trackInput = (event) => {
     const name = event.target.name;
     const value = event.target.value;
@@ -18,21 +35,22 @@ export default function App() {
     newInput[name] = value
     setInput(newInput);
   }
+
   return (
     <div className='container'>
-      <Form onChange={trackInput} input={input} />
-      <CV input={input} />
+      <Form onChange={trackInput} onEmployment={onEmployment} />
+      <CV input={input}  employment={employment}/>
     </div> 
   )
 }
   
-function CV({ input }) {
+function CV({ input , employment}) {
 
   return (
     <div className='cv-container'>
       <div className="cv-wrapper">
         <SideDetails input={ input} />
-        <ProfileInfo input={ input} />
+        <ProfileInfo input={ input}  employment={employment} />
      </div> 
     </div>
   )
@@ -40,9 +58,10 @@ function CV({ input }) {
 
 
 
-function Form({ onChange }) {
+function Form({ onChange , onEmployment}) {
   const [add, setAdd] = useState([]);
   
+
   return (
     <div className="form">
       <div className="form-wrapper">
@@ -55,7 +74,7 @@ function Form({ onChange }) {
             <Education onChange={onChange} /> 
           </DropDown>
           <DropDown title={ 'Employment History'}>
-            <Employment onChange={onChange} />
+            <Employment onEmployment={onEmployment }/>
         </DropDown> 
       </div>
       </div>

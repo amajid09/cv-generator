@@ -1,11 +1,11 @@
 /* eslint-disable react/prop-types */
 import './css/Profile.css'
-export default function ProfileInfo( { input }) {
+export default function ProfileInfo( { input , employment}) {
     return (
         <div className="profile-info">
             <Summary summary={ input.summary} />
             <Education school_description={input.school_description} school={input.school } degree={input.degree} start={input.start} end={input.end} city={input.city} />
-            <Employment description={input.job_description} title={input.job_title} employer={input.employer} start={input.job_start} end={input.job_end} city={ input.job_city } />
+            <Employment employment={employment} />
         </div>    
     )
 }
@@ -24,25 +24,24 @@ function Education({ school = "Unisa",
       </div> 
    ) 
 }
-function Employment({ title, employer, start, end, city, description}) {
+function Employment({ employment}) {
     return (
         <div className="employment">
             <h1>Employment history</h1>
-            <div className="history">
-                <h2>{employer}</h2>
-                <p>{ title }</p>
-                <p className='city'>{ city }</p>
-                <p className='date'>{start} - { end }</p>
-                <p>{ description }</p>
+            {employment.map((element, index) => {
+                return (
+                    <div key={index} className="history">
+                        <h2>{element.employer}</h2>
+                        <p>{ element.job_title }</p>
+                        <p className='city'>{ element.job_city }</p>
+                        <p className='date'>{element.job_start} - { element.job_end }</p>
+                        <p>{ element.job_description }</p>
+                    </div>
+                ) 
+            })}
             </div>
-            <div className="history">
-                <h2>Aircon pty cc.</h2>
-                <p>Full Stack developer</p>
-                <p className='date'>02/2023 - present</p>
-                <p>Gained extensive experience working on the backend of a huge enterprise application. Helped migrate to a programming language in one particular server. Refactored chunks of the codebase to make the system being used much more scalable, mantainable, and testable. I picked up skills like OOP, programming in a more modular way to save dev time. I learned C#, took advantage of its performance to make the application much more usable.</p>
-            </div>
-        </div>
-    )
+            )
+            
 }
 
 function Summary({summary}) {
