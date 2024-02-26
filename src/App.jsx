@@ -11,18 +11,13 @@ import DropDown from './dropdown'
 
 export default function App() {
   const [input , setInput] = useState({})
-  const [employment, setEmployment] = useState([{
-  'job_title': '', 'employer': '', 'job_start': '', 'job_end': '', 'job_description': '',
-  }])
-    const onEmployment = (event, index) => {
+  const [employment, setEmployment] = useState({})
+    const onEmployment = (event) => {
         const name = event.target.name;
         const value = event.target.value;
-        const newEmployment = employment.slice();
-
-        const newEmploymentObj = Object.assign({}, newEmployment[index]); 
+        const newEmploymentObj = Object.assign({}, employment); 
         newEmploymentObj[name] = value
-        newEmployment[index] = newEmploymentObj;
-        setEmployment(newEmployment)
+        setEmployment(newEmploymentObj)
   }
 
   const trackInput = (event) => {

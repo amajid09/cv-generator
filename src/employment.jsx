@@ -25,11 +25,11 @@ function EmploymentInfo({ onChange }) {
 export default function Employment( {onEmployment} ) {
   
     const [add, setAdd] = useState([
-        <EmploymentInfo key={0} onChange={(event) => onEmployment(event, 0)} />,
+        <EmploymentInfo key={0} onChange={onEmployment} />,
     ])
     const onAdd = () => {
         const newAdd = add.slice();
-        const element = <EmploymentInfo key={add.length} onChange={(event) => onEmployment(event, add.length)} />;
+        const element = <EmploymentInfo key={add.length} onChange={onEmployment} />;
         newAdd.push(element)
         setAdd(newAdd);
         console.log('in the add state')
@@ -37,7 +37,8 @@ export default function Employment( {onEmployment} ) {
     console.log('here')
     return (
         <>
-            {add.map(el=> el)}
+            {/* {add.map(el=> el)} */}
+            <EmploymentInfo key={0} onChange={onEmployment} />,
             <button onClick={() => onAdd()} className="add-more">+</button>
         </>
     )

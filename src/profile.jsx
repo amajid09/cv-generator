@@ -28,20 +28,15 @@ function Employment({ employment}) {
     return (
         <div className="employment">
             <h1>Employment history</h1>
-            {employment.map((element, index) => {
-                console.log(element);
-                return (
-                    <div key={index} className="history">
-                        <h2>{element.employer}</h2>
-                        <p>{ element.job_title }</p>
-                        <p className='city'>{ element.job_city }</p>
-                        <p className='date'>{element.job_start} - { element.job_end }</p>
-                        <p>{ element.job_description }</p>
-                    </div>
-                ) 
-            })}
+            <div className="history">
+                <h2>{employment.employer}</h2>
+                <p>{ employment.job_title }</p>
+                <p className='city'>{ employment.job_city }</p>
+                <p className='date'>{employment.job_start} - { employment.job_end }</p>
+                <p>{ employment.job_description }</p>
             </div>
-            )
+        </div>
+    )
             
 }
 
